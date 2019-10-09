@@ -99,12 +99,9 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 
 	//printf("position = %d\n", position);
 
+	
 	int i=0;
 
-	start=(t_chain*)malloc(sizeof(t_chain));
-	start->val=1;
-	start->n=NULL;
-	start->p=NULL;
 
 	last = start;
 	
@@ -113,9 +110,7 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 		newElm=(t_chain*)malloc(sizeof(t_chain));
 		newElm->val=i;
 		newElm->n=NULL;
-		last->n = newElm;
-		newElm->p = last;
-		last = newElm;
+		
 	}
 
 return start;
