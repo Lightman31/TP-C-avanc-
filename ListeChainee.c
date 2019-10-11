@@ -40,7 +40,6 @@ int lengthOfChain(t_chain *firstElem)
 	int cpt = 1;
 	t_chain *nextElem = firstElem;
 	int fin = 0;
-	printf("%d\n", nextElem->val);
 	while (fin == 0)
 	{
 		nextElem = nextElem->n;
@@ -91,30 +90,28 @@ void readListLastToFirst(t_chain *firstElem)
 
 t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 {
+	int i=0;
+	t_chain *nextElem = firstElem;
 
-
-	if (position < 0) position = 0;
-	else if (position > lengthOfChain(firstElem)) position = lengthOfChain(firstElem);
+	if (position <= 0) 
+	{
+		firstElem->p = elm2insert;
+		elm2insert->n = firstElem;
+		return elm2insert;
+	}
+		
+	else if (position > lengthOfChain(firstElem))
+	{
+		position = lengthOfChain(firstElem);
+	}
 	else position = 0;
 
 	//printf("position = %d\n", position);
-
 	
-	int i=0;
-
-
-	last = start;
-	
-	for(i=2; i<sizeList+1; i++)
+	for(i=2; i<position; i++)
 	{
-		newElm=(t_chain*)malloc(sizeof(t_chain));
-		newElm->val=i;
-		newElm->n=NULL;
-		
+		nextElem = nextElem->p;		
 	}
-
-return start;
-
 
 
 	return firstElem;
@@ -123,17 +120,20 @@ return start;
 int main(){
 
 	t_chain *firstElem = createChainList(10);
+	t_chain *anElement;
+	anElement=(t_chain*)malloc(sizeof(t_chain));
+	anElement->val=14;
+	anElement->n=NULL;
+	anElement->p=NULL;
 
+	firstElem = insertElm(0, anElement, firstElem);
 
 	printf("taille de la chaine = %d\n", lengthOfChain(firstElem));
 
-	printf("first t0 last\n");
-	readListFirstToLast(firstElem);
+	firstElem = insertElm(5, anElement, firstElem);
 
 	printf("last t0 first\n");
 	readListLastToFirst(firstElem);
-
-	firstElem = insertElm(5, firstElem, firstElem);
 
 	printf("first t0 last\n");
 	readListFirstToLast(firstElem);
