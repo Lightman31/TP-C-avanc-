@@ -91,7 +91,9 @@ void readListLastToFirst(t_chain *firstElem)
 t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 {
 	int i=0;
-	t_chain *nextElem = firstElem;
+	int fin = 0;
+	t_chain *previousElem = firstElem;
+	t_chain *nextElem = firstElem->n;
 
 	if (position <= 0) 
 	{
@@ -100,18 +102,31 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 		return elm2insert;
 	}
 		
-	else if (position > lengthOfChain(firstElem))
+	else 
 	{
+		if (position > lengthOfChain(firstElem))
 		position = lengthOfChain(firstElem);
+		printf("position = %d\n", position);
+		for(i=0; i<position-1; i++)
+		{
+			previousElem = previousElem->n;
+			nextElem = nextElem->n;		
+		}/*
+		printf("previous element = %d\n", previousElem->val);
+		printf("next element = %d\n", nextElem->val);
+		elm2insert->p = previousElem;
+		elm2insert->n = nextElem;
+		previousElem->n = elm2insert;
+		nextElem->p =elm2insert;
+		printf("elm2insert->p = %d\n", elm2insert->p->val);
+		printf("elm2insert->n = %d\n", elm2insert->n ->val);
+		printf("previousElem->n  = %d\n", previousElem->n->val);
+		printf("next element = %d\n", nextElem->val);
+		*/
+
 	}
-	else position = 0;
 
 	//printf("position = %d\n", position);
-	
-	for(i=2; i<position; i++)
-	{
-		nextElem = nextElem->p;		
-	}
 
 
 	return firstElem;
