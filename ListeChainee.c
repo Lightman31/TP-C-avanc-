@@ -92,39 +92,50 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 {
 	int i=0;
 	int fin = 0;
-	t_chain *previousElem = firstElem;
-	t_chain *nextElem = firstElem->n;
+	t_chain *nextElem = firstElem;
+	t_chain *newElem = (t_chain*)malloc(sizeof(t_chain));
+	newElem->val = elm2insert->val;
+	newElem->p = NULL;
+	newElem->n = NULL;
 
 	if (position <= 0) 
 	{
-		firstElem->p = elm2insert;
-		elm2insert->n = firstElem;
-		return elm2insert;
+		firstElem->p = newElem;
+		newElem->n = firstElem;
+		return newElem;
 	}
-		
+
 	else 
 	{
 		if (position > lengthOfChain(firstElem))
-		position = lengthOfChain(firstElem);
-		printf("position = %d\n", position);
-		for(i=0; i<position-1; i++)
 		{
-			previousElem = previousElem->n;
-			nextElem = nextElem->n;		
-		}/*
-		printf("previous element = %d\n", previousElem->val);
-		printf("next element = %d\n", nextElem->val);
-		elm2insert->p = previousElem;
-		elm2insert->n = nextElem;
-		previousElem->n = elm2insert;
-		nextElem->p =elm2insert;
-		printf("elm2insert->p = %d\n", elm2insert->p->val);
-		printf("elm2insert->n = %d\n", elm2insert->n ->val);
-		printf("previousElem->n  = %d\n", previousElem->n->val);
-		printf("next element = %d\n", nextElem->val);
-		*/
+			for(i=0; i<lengthOfChain(firstElem)-1; i++)
+			{
+				nextElem = nextElem->n;		
+			}
+			newElem->p = nextElem;
+			nextElem->n = newElem;
+		}
+		else 
+		{
+			//printf("position = %d\n", position);
+
+			for(i=0; i<position-1; i++)
+			{
+				nextElem = nextElem->n;		
+			}
+			//printf("next element = %d\n", nextElem->val);
+			newElem->p = nextElem->p;
+			newElem->n = nextElem;
+			nextElem->p->n = newElem;
+			nextElem->p = newElem;
+			//printf("elm2insert->p = %d\n", newElem->p->val);
+			//printf("elm2insert->n = %d\n", newElem->n ->val);
+			//printf("next element = %d\n", nextElem->val);
+		}
 
 	}
+
 
 	//printf("position = %d\n", position);
 
@@ -141,10 +152,18 @@ int main(){
 	anElement->n=NULL;
 	anElement->p=NULL;
 
-	firstElem = insertElm(0, anElement, firstElem);
+	//firstElem = insertElm(0, anElement, firstElem);
 
 	printf("taille de la chaine = %d\n", lengthOfChain(firstElem));
 
+	firstElem = insertElm(27, anElement, firstElem);
+	firstElem = insertElm(6, anElement, firstElem);
+	firstElem = insertElm(5, anElement, firstElem);
+	firstElem = insertElm(7, anElement, firstElem);
+	firstElem = insertElm(0, anElement, firstElem);
+	firstElem = insertElm(-5, anElement, firstElem);
+	firstElem = insertElm(7, anElement, firstElem);
+	firstElem = insertElm(26, anElement, firstElem);
 	firstElem = insertElm(5, anElement, firstElem);
 
 	printf("last t0 first\n");
