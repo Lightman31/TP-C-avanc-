@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <string.h>
 
 
 typedef struct chainList{
-	int val;
-	struct chainList *p ,*n;
+	char val;
+	int passage ;
+	struct chainList *d ,*b;
 }t_chain;
 
 
@@ -16,30 +18,41 @@ typedef struct chainList{
 * RETURN : premier élément de la listé crée
 * PURPOSE : crée une liste chainé de la taille désiré
 *************************************************************/
-t_chain *createChainList(int sizeList) // Fonction qui prend en parametre la taille de la liste chainee que l'on souhaite creer.
+t_chain *createChainList() // Fonction qui prend en parametre la taille de la liste chainee que l'on souhaite creer.
 {
-	t_chain *start, *last, *newElm;
-	int i=0;
+	t_chain *a, *ab, *aba, *abac, *abaca;
 
-	start=(t_chain*)malloc(sizeof(t_chain));
-	start->val=1;
-	start->n=NULL;
-	start->p=NULL;
+	a=(t_chain*)malloc(sizeof(t_chain));
+	a->val='a';
+	a->d=NULL;
+	a->b=NULL;
 
-	last = start;
-	
-	for(i=2; i<sizeList+1; i++)
-	{
-		newElm=(t_chain*)malloc(sizeof(t_chain));
-		newElm->val=i;
-		newElm->n=NULL;
-		last->n = newElm;
-		newElm->p = last;
-		last = newElm;
-	}
+	ab=(t_chain*)malloc(sizeof(t_chain));
+	ab->val='b';
+	ab->d=NULL;
+	ab->b=NULL;
 
-return start;
+	aba=(t_chain*)malloc(sizeof(t_chain));
+	aba->val='a';
+	aba->d=NULL;
+	aba->b=NULL;
 
+	abac=(t_chain*)malloc(sizeof(t_chain));
+	abac->val='c';
+	abac->d=NULL;
+	abac->b=NULL;
+
+	abaca=(t_chain*)malloc(sizeof(t_chain));
+	abaca->val='a';
+	abaca->d=NULL;
+	abaca->b=NULL;
+
+	a->d = ab;
+	ab->d = aba;
+	aba->d = abac;
+	abac->d = abaca;
+
+return a;
 }
 
 /************************************************************
@@ -49,7 +62,7 @@ return start;
 * RETURN : nombre de maillon dans la liste
 * PURPOSE : compte et retourne la taille de la liste chainé
 *************************************************************/
-int lengthOfChain(t_chain *firstElem)
+/*int lengthOfChain(t_chain *firstElem)
 {
 	int cpt = 1;
 	t_chain *nextElem = firstElem;
@@ -62,59 +75,31 @@ int lengthOfChain(t_chain *firstElem)
 		cpt++;
 	}
 	return cpt;
-}
+}*/
 
 /************************************************************
-* TITLE : readListFirstToLast
+* TITLE : readChaine
 * Creator : Léo 
 * PARAMETRE : premier maillon de la liste chainé
 * RETURN : empty
 * PURPOSE : affiche la valeur stocké dans chaque élément de la liste chainé, dans l'ordre 
 *************************************************************/
-void readListFirstToLast(t_chain *firstElem)
+void readChaine(t_chain *firstElem)
 {
 	t_chain *nextElem = firstElem;
 	int fin = 0;
-	printf("%d\n", nextElem->val);
+	printf("%c", nextElem->val);
 	while (fin == 0)
 	{
-		nextElem = nextElem->n;
-		if (nextElem->n == NULL)
+		nextElem = nextElem->d;
+		if (nextElem->d == NULL)
 			fin = 1;
-		printf("%d\n", nextElem->val);
+		printf("%c", nextElem->val);
 	}
+
+	printf ("\n");
 
 }
-
-/************************************************************
-* TITLE : readListLastToFirst
-* Creator : Léo 
-* PARAMETRE : premier maillon de la liste chainé
-* RETURN : empty
-* PURPOSE : affiche la valeur stocké dans chaque élément de la liste chainé, dans l'ordre inverse
-*************************************************************/
-void readListLastToFirst(t_chain *firstElem)
-{
-	t_chain *nextElem = firstElem;
-	int fin = 0;
-	while (fin == 0)
-	{
-		nextElem = nextElem->n;
-		if (nextElem->n == NULL)
-			fin = 1;
-	}
-	fin = 0;
-	printf("%d\n", nextElem->val);
-	while (fin == 0)
-	{
-		nextElem = nextElem->p;
-		if (nextElem->p == NULL)
-			fin = 1;
-		printf("%d\n", nextElem->val);
-	}
-
-}
-
 
 /************************************************************
 * TITLE : insertElm
@@ -123,7 +108,7 @@ void readListLastToFirst(t_chain *firstElem)
 * RETURN : premier élément de la liste
 * PURPOSE : ajouter un élément dans la liste chainé à la position souhaité
 *************************************************************/
-t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
+/*t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 {
 	int i=0;
 	int fin = 0;
@@ -173,6 +158,7 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 	//printf("position = %d\n", position);
 	return firstElem;
 }
+*/
 
 
 /************************************************************
@@ -184,33 +170,8 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 *************************************************************/
 int main(){
 
-	t_chain *firstElem = createChainList(10);
-	t_chain *anElement;
-	anElement=(t_chain*)malloc(sizeof(t_chain));
-	anElement->val=42;
-	anElement->n=NULL;
-	anElement->p=NULL;
+	t_chain *firstElem = createChainList();
 
-	//firstElem = insertElm(0, anElement, firstElem);
-	printf("last t0 first\n");
-	readListLastToFirst(firstElem);
-	printf("taille de la chaine = %d\n", lengthOfChain(firstElem));
-
-	firstElem = insertElm(27, anElement, firstElem);
-	firstElem = insertElm(6, anElement, firstElem);
-	firstElem = insertElm(5, anElement, firstElem);
-	firstElem = insertElm(7, anElement, firstElem);
-	firstElem = insertElm(0, anElement, firstElem);
-	firstElem = insertElm(-5, anElement, firstElem);
-	firstElem = insertElm(7, anElement, firstElem);
-	firstElem = insertElm(26, anElement, firstElem);
-	firstElem = insertElm(5, anElement, firstElem);
-
-	printf("last t0 first\n");
-	readListLastToFirst(firstElem);
-
-	printf("first t0 last\n");
-	readListFirstToLast(firstElem);
-
+	readChaine(firstElem);
 
 }
