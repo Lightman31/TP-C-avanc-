@@ -35,7 +35,7 @@ void displayCircle(struct object *pt);
 void displayRectangle(struct object *pt);
 
 void addObject(struct object *pt, struct object *start);
-void displayList();
+void displayList(struct object *start);
 
 
 int main (void){
@@ -50,8 +50,36 @@ int main (void){
 	addObject(createTriangle(2,4,6,6,4,2), start);
 	addObject(createCircle(5), start);
 
+	displayList(start);
+
 	return 0;
 }
+
+
+void displayList(struct object *start){
+
+
+	struct object *nextObject = start;
+	nextObject->display((t_obj*)nextObject);
+	while (nextObject->next != NULL){
+		nextObject = nextObject->next;
+		nextObject->display((t_obj*)nextObject);
+	}
+
+}
+
+
+void addObject(struct object *pt, struct object *start){
+	struct object *nextObject = start;
+	while (nextObject->next != NULL){
+		nextObject = nextObject->next;
+	}
+	nextObject->next = pt;
+	pt->next = NULL;
+
+}
+
+
 
 struct object *createCircle(int radius){
 
@@ -109,15 +137,5 @@ void displayTriangle(struct object *pt){
 	printf ("this is a triangle with the following parameters : x1=%d, x2=%d, x3=%d, y1=%d, y2=%d, y3=%d \n", disp->x1, disp->x2, disp->x3, disp->y1, disp->y2, disp->y3);
 }
 
-void addObject(struct object *pt, struct object *start){
-	struct object *nextObject = start;
-	while (nextObject->next != NULL){
-		nextObject = nextObject->next;
-	}
-	nextObject->display((t_obj*)nextObject);
-
-	nextObject->next = pt;
-
-}
 
 
