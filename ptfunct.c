@@ -34,12 +34,28 @@ void displayTriangle(struct object *pt);
 void displayCircle(struct object *pt);
 void displayRectangle(struct object *pt);
 
-void addObject(struct object *pt);
+void addObject(struct object *pt, struct object *start);
 void displayList();
 
 
 int main (void){
 
+<<<<<<< Updated upstream
+=======
+	struct object *start = (t_obj*)createCircle(4);
+	//start->display((t_obj*)start);
+	start->next = NULL;
+	struct object *second = (t_obj*)createCircle(7);
+	struct object *sd = (t_obj*)createCircle(1);
+	struct object *sf = (t_obj*)createCircle(2);
+	struct object *sg = (t_obj*)createCircle(5);
+	//second->display((t_obj*)second);
+	start->next = second;
+
+	addObject(sd, start);
+	addObject(sf, start);
+	addObject(sg, start);
+>>>>>>> Stashed changes
 
 	t_obj *test;
 	test = (t_obj*)malloc(sizeof(t_obj));
@@ -101,6 +117,7 @@ void displayCircle(struct object *pt){
 	printf ("this is a circle which has a radius of: %d \n", disp->radius);
 }
 
+<<<<<<< Updated upstream
 void displayRectangle(struct object *pt){
 	struct rectangle *disp = (struct rectangle*)pt;
 	printf ("this is a rectangle with the following parameters : left=%d, top=%d, width=%d, height=%d\n", disp->left, disp->top, disp->width, disp->height);
@@ -112,3 +129,16 @@ void displayTriangle(struct object *pt){
  	struct triangle *disp = (struct triangle*)pt;
 	printf ("this is a triangle with the following parameters : x1=%d, x2=%d, x3=%d, y1=%d, y2=%d, y3=%d \n", disp->x1, disp->x2, disp->x3, disp->y1, disp->y2, disp->y3);
 }
+=======
+void addObject(struct object *pt, struct object *start){
+	struct object *nextObject = start;
+	while (nextObject->next != NULL){
+		nextObject = nextObject->next;
+	}
+	nextObject->display((t_obj*)nextObject);
+
+	nextObject->next = pt;
+
+}
+
+>>>>>>> Stashed changes
