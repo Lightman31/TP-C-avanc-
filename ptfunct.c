@@ -30,9 +30,9 @@ struct circle *createCircle(int radius);
 struct rectangle *createRectangle(int left, int top, int width, int height);
 struct triangle *createTriangle(int x1, int y1, int x2, int y2, int x3, int y3);
 
-void displayTriangle(struct triangle *pt);
-void displayCircle(struct circle *pt);
-void displayRectangle(struct rectangle *pt);
+void displayTriangle(struct object *pt);
+void displayCircle(struct object *pt);
+void displayRectangle(struct object *pt);
 
 void addObject(struct object *pt);
 void displayList();
@@ -40,14 +40,8 @@ void displayList();
 
 int main (void){
 
-
-	t_obj *test;
-	test = (t_obj*)malloc(sizeof(t_obj));
-
-//	test->display = displayTriangle;
-
-	struct circle *coucou = createCircle(4);
-	coucou->display(coucou);
+	struct object *coucou = (t_obj*)createCircle(4);
+	coucou->display((t_obj*)coucou);
 
 
 
@@ -60,12 +54,14 @@ struct circle *createCircle(int radius){
 
 	newCircle->display = displayCircle;
 	newCircle->radius = radius;
+
+	return newCircle;
 }
 
-void displayCircle(struct circle *pt){
-
+void displayCircle(struct object *pt1){
+ 	struct circle *disp = (struct circle*)pt1;
 	printf ("this is a circle \n");
-	printf("test %d\n", pt->radius);
+	printf("test %d\n", disp->radius);
 
 }
 
