@@ -26,9 +26,9 @@ void (*display)(struct object *pt);
 int x1, y1, x2, y2, x3, y3;
 };
 
-struct circle *createCircle(int radius);
-struct rectangle *createRectangle(int left, int top, int width, int height);
-struct triangle *createTriangle(int x1, int y1, int x2, int y2, int x3, int y3);
+struct object *createCircle(int radius);
+struct object *createRectangle(int left, int top, int width, int height);
+struct object *createTriangle(int x1, int y1, int x2, int y2, int x3, int y3);
 
 void displayTriangle(struct object *pt);
 void displayCircle(struct object *pt);
@@ -40,48 +40,30 @@ void displayList();
 
 int main (void){
 
-	struct object *start = (t_obj*)createCircle(4);
-	//start->display((t_obj*)start);
+	struct object *start = createCircle(4);
 	start->next = NULL;
-	struct object *second = (t_obj*)createCircle(7);
-	struct object *sd = (t_obj*)createCircle(1);
-	struct object *sf = (t_obj*)createCircle(2);
-	struct object *sg = (t_obj*)createCircle(5);
-	//second->display((t_obj*)second);
-	start->next = second;
 
-	addObject(sd, start);
-	addObject(sf, start);
-	addObject(sg, start);
-
-	t_obj *test;
-	test = (t_obj*)malloc(sizeof(t_obj));
-
-//	test->display = displayTriangle;
-
-	struct object *testCircle = (t_obj*)createCircle(4);
-	testCircle->display((t_obj*)testCircle);
-
-	struct object *testRectangle = (t_obj*)createRectangle(2,4,6,8);
-	testRectangle->display((t_obj*)testRectangle);
-
-	struct object *testTriangle = (t_obj*)createTriangle(2,4,6,6,4,2);
-	testTriangle->display((t_obj*)testTriangle);
+	addObject(createCircle(7), start);
+	addObject(createCircle(1), start);
+	addObject(createCircle(2), start);
+	addObject(createRectangle(2,4,6,8), start);
+	addObject(createTriangle(2,4,6,6,4,2), start);
+	addObject(createCircle(5), start);
 
 	return 0;
 }
 
-struct circle *createCircle(int radius){
+struct object *createCircle(int radius){
 
 	struct circle *newCircle = (struct circle*)malloc(sizeof(struct circle));
 
 	newCircle->display = displayCircle;
 	newCircle->radius = radius;
 
-	return newCircle;
+	return (t_obj*)newCircle;
 }
 
-struct rectangle *createRectangle(int left, int top, int width, int height){
+struct object *createRectangle(int left, int top, int width, int height){
 
 		struct rectangle *newRectangle = (struct rectangle*)malloc(sizeof(struct rectangle));
 
@@ -91,10 +73,10 @@ struct rectangle *createRectangle(int left, int top, int width, int height){
 		newRectangle->width = width;
 		newRectangle->height = height;
 
-		return newRectangle;
+		return (t_obj*)newRectangle;
 }
 
-struct triangle *createTriangle(int x1, int x2, int x3, int y1, int y2, int y3){
+struct object *createTriangle(int x1, int x2, int x3, int y1, int y2, int y3){
 
 	struct triangle *newTriangle = (struct triangle*)malloc(sizeof(struct triangle));
 
@@ -106,7 +88,7 @@ struct triangle *createTriangle(int x1, int x2, int x3, int y1, int y2, int y3){
 	newTriangle->y2 = y2;
 	newTriangle->y3 = y3;
 
-	return newTriangle;
+	return (t_obj*)newTriangle;
 }
 
 void displayCircle(struct object *pt){
