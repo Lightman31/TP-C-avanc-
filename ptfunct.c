@@ -40,10 +40,20 @@ void displayList();
 
 int main (void){
 
-	struct object *coucou = (t_obj*)createCircle(4);
-	coucou->display((t_obj*)coucou);
 
+	t_obj *test;
+	test = (t_obj*)malloc(sizeof(t_obj));
 
+//	test->display = displayTriangle;
+
+	struct object *testCircle = (t_obj*)createCircle(4);
+	testCircle->display((t_obj*)testCircle);
+
+	struct object *testRectangle = (t_obj*)createRectangle(2,4,6,8);
+	testRectangle->display((t_obj*)testRectangle);
+
+	struct object *testTriangle = (t_obj*)createTriangle(2,4,6,6,4,2);
+	testTriangle->display((t_obj*)testTriangle);
 
 	return 0;
 }
@@ -58,10 +68,47 @@ struct circle *createCircle(int radius){
 	return newCircle;
 }
 
-void displayCircle(struct object *pt1){
- 	struct circle *disp = (struct circle*)pt1;
-	printf ("this is a circle \n");
-	printf("test %d\n", disp->radius);
+struct rectangle *createRectangle(int left, int top, int width, int height){
+
+		struct rectangle *newRectangle = (struct rectangle*)malloc(sizeof(struct rectangle));
+
+		newRectangle->display = displayRectangle;
+		newRectangle->left = left;
+		newRectangle->top = top;
+		newRectangle->width = width;
+		newRectangle->height = height;
+
+		return newRectangle;
+}
+
+struct triangle *createTriangle(int x1, int x2, int x3, int y1, int y2, int y3){
+
+	struct triangle *newTriangle = (struct triangle*)malloc(sizeof(struct triangle));
+
+	newTriangle->display = displayTriangle;
+	newTriangle->x1 = x1;
+	newTriangle->x2 = x2;
+	newTriangle->x3 = x3;
+	newTriangle->y1 = y1;
+	newTriangle->y2 = y2;
+	newTriangle->y3 = y3;
+
+	return newTriangle;
+}
+
+void displayCircle(struct object *pt){
+ 	struct circle *disp = (struct circle*)pt;
+	printf ("this is a circle which has a radius of: %d \n", disp->radius);
+}
+
+void displayRectangle(struct object *pt){
+	struct rectangle *disp = (struct rectangle*)pt;
+	printf ("this is a rectangle with the following parameters : left=%d, top=%d, width=%d, height=%d\n", disp->left, disp->top, disp->width, disp->height);
 
 }
 
+
+void displayTriangle(struct object *pt){
+ 	struct triangle *disp = (struct triangle*)pt;
+	printf ("this is a triangle with the following parameters : x1=%d, x2=%d, x3=%d, y1=%d, y2=%d, y3=%d \n", disp->x1, disp->x2, disp->x3, disp->y1, disp->y2, disp->y3);
+}
