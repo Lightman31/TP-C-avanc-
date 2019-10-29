@@ -21,14 +21,14 @@ t_chain *createChainList(int sizeList) // Fonction qui prend en parametre la tai
 	t_chain *start, *last, *newElm;
 	int i=0;
 
-	start=(t_chain*)malloc(sizeof(t_chain));
+	start=(t_chain*)malloc(sizeof(t_chain)); // crée le premier maillon de la chaine 
 	start->val=1;
 	start->n=NULL;
 	start->p=NULL;
 
 	last = start;
 	
-	for(i=2; i<sizeList+1; i++)
+	for(i=2; i<sizeList+1; i++) // ajoute tout les autres maillons
 	{
 		newElm=(t_chain*)malloc(sizeof(t_chain));
 		newElm->val=i;
@@ -54,7 +54,8 @@ int lengthOfChain(t_chain *firstElem)
 	int cpt = 1;
 	t_chain *nextElem = firstElem;
 	int fin = 0;
-	while (fin == 0)
+
+	while (fin == 0) // on compte les maillons
 	{
 		nextElem = nextElem->n;
 		if (nextElem->n == NULL)
@@ -76,7 +77,7 @@ void readListFirstToLast(t_chain *firstElem)
 	t_chain *nextElem = firstElem;
 	int fin = 0;
 	printf("%d\n", nextElem->val);
-	while (fin == 0)
+	while (fin == 0) // on affiche, puis on lit le maillon le maillon suivant
 	{
 		nextElem = nextElem->n;
 		if (nextElem->n == NULL)
@@ -96,8 +97,8 @@ void readListFirstToLast(t_chain *firstElem)
 void readListLastToFirst(t_chain *firstElem)
 {
 	t_chain *nextElem = firstElem;
-	int fin = 0;
-	while (fin == 0)
+	int fin = 0; 
+	while (fin == 0) // on se positionne à la fin de la chaine
 	{
 		nextElem = nextElem->n;
 		if (nextElem->n == NULL)
@@ -105,7 +106,7 @@ void readListLastToFirst(t_chain *firstElem)
 	}
 	fin = 0;
 	printf("%d\n", nextElem->val);
-	while (fin == 0)
+	while (fin == 0) // on affiche, puis on lit le maillon précédent
 	{
 		nextElem = nextElem->p;
 		if (nextElem->p == NULL)
@@ -128,12 +129,12 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 	int i=0;
 	int fin = 0;
 	t_chain *nextElem = firstElem;
-	t_chain *newElem = (t_chain*)malloc(sizeof(t_chain));
+	t_chain *newElem = (t_chain*)malloc(sizeof(t_chain)); // on crée une copie du maillon a ajouter
 	newElem->val = elm2insert->val;
 	newElem->p = NULL;
 	newElem->n = NULL;
 
-	if (position <= 0) 
+	if (position <= 0) //blindage du cas ou position <= 0 : on insère au début de la chaine
 	{
 		firstElem->p = newElem;
 		newElem->n = firstElem;
@@ -142,7 +143,7 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 
 	else 
 	{
-		if (position > lengthOfChain(firstElem))
+		if (position > lengthOfChain(firstElem)) // blindage du cas ou la position est supérieure à la taille de la chaine : on insère à la fin de la chaine
 		{
 			for(i=0; i<lengthOfChain(firstElem)-1; i++)
 			{
@@ -151,7 +152,7 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 			newElem->p = nextElem;
 			nextElem->n = newElem;
 		}
-		else 
+		else // insertion dans le cas ou la position est accepté
 		{
 			//printf("position = %d\n", position);
 
@@ -184,9 +185,9 @@ t_chain *insertElm(int position, t_chain *elm2insert, t_chain *firstElem)
 *************************************************************/
 int main(){
 
-	t_chain *firstElem = createChainList(10);
+	t_chain *firstElem = createChainList(10); // création d'une chaine de 10 éléments
 	t_chain *anElement;
-	anElement=(t_chain*)malloc(sizeof(t_chain));
+	anElement=(t_chain*)malloc(sizeof(t_chain)); // création de l'élément à insérer
 	anElement->val=42;
 	anElement->n=NULL;
 	anElement->p=NULL;
