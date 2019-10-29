@@ -3,27 +3,25 @@
 #include <malloc.h>
 #include <string.h>
 
-
-
 typedef struct object {
-struct object *next;
-void (*display)(struct object *object);
+	struct object *next;
+	void (*display)(struct object *object);
 }t_obj;
 
 struct rectangle {
-struct object *next;
-void (*display)(struct object *pt);
-int left, top, width, height;
+	struct object *next;
+	void (*display)(struct object *pt);
+	int left, top, width, height;
 };
 struct circle {
-struct object *next;
-void (*display)(struct object *pt);
-int radius;
+	struct object *next;
+	void (*display)(struct object *pt);
+	int radius;
 };
 struct triangle {
-struct object *next;
-void (*display)(struct object *pt);
-int x1, y1, x2, y2, x3, y3;
+	struct object *next;
+	void (*display)(struct object *pt);
+	int x1, y1, x2, y2, x3, y3;
 };
 
 struct object *createCircle(int radius);
@@ -56,8 +54,7 @@ int main (void){
 }
 
 
-void displayList(struct object *start){
-
+void displayList(struct object *start){ // function that displays the list of objects that begins with object start.
 
 	struct object *nextObject = start;
 	nextObject->display((t_obj*)nextObject);
@@ -65,23 +62,22 @@ void displayList(struct object *start){
 		nextObject = nextObject->next;
 		nextObject->display((t_obj*)nextObject);
 	}
-
 }
 
 
-void addObject(struct object *pt, struct object *start){
+void addObject(struct object *pt, struct object *start){ // function that adds the pointed struct object pt to the list of objects begining with the object start.
+
 	struct object *nextObject = start;
 	while (nextObject->next != NULL){
 		nextObject = nextObject->next;
 	}
 	nextObject->next = pt;
 	pt->next = NULL;
-
 }
 
 
 
-struct object *createCircle(int radius){
+struct object *createCircle(int radius){ // function that returns an object which is casted as a circle to access circle parameters. 
 
 	struct circle *newCircle = (struct circle*)malloc(sizeof(struct circle));
 
@@ -91,22 +87,22 @@ struct object *createCircle(int radius){
 	return (t_obj*)newCircle;
 }
 
-struct object *createRectangle(int left, int top, int width, int height){
+struct object *createRectangle(int left, int top, int width, int height){ // function that returns an object which is casted as a rectangle to access rectangle parameters. 
 
-		struct rectangle *newRectangle = (struct rectangle*)malloc(sizeof(struct rectangle));
+	struct rectangle *newRectangle = (struct rectangle*)malloc(sizeof(struct rectangle));
 
-		newRectangle->display = displayRectangle;
-		newRectangle->left = left;
-		newRectangle->top = top;
-		newRectangle->width = width;
-		newRectangle->height = height;
+	newRectangle->display = displayRectangle;
+	newRectangle->left = left;
+	newRectangle->top = top;
+	newRectangle->width = width;
+	newRectangle->height = height;
 
-		return (t_obj*)newRectangle;
+	return (t_obj*)newRectangle;
 }
 
-struct object *createTriangle(int x1, int x2, int x3, int y1, int y2, int y3){
+struct object *createTriangle(int x1, int x2, int x3, int y1, int y2, int y3){ // function that returns an object which is casted as a triangle to access triangle parameters. 
 
-	struct triangle *newTriangle = (struct triangle*)malloc(sizeof(struct triangle));
+struct triangle *newTriangle = (struct triangle*)malloc(sizeof(struct triangle));
 
 	newTriangle->display = displayTriangle;
 	newTriangle->x1 = x1;
@@ -119,21 +115,18 @@ struct object *createTriangle(int x1, int x2, int x3, int y1, int y2, int y3){
 	return (t_obj*)newTriangle;
 }
 
-void displayCircle(struct object *pt){
- 	struct circle *disp = (struct circle*)pt;
+void displayCircle(struct object *pt){ // function that displays parameters of a circle.
+	struct circle *disp = (struct circle*)pt;
 	printf ("this is a circle which has a radius of: %d \n", disp->radius);
 }
 
-
-void displayRectangle(struct object *pt){
+void displayRectangle(struct object *pt){ // function that displays parameters of a rectangle.
 	struct rectangle *disp = (struct rectangle*)pt;
 	printf ("this is a rectangle with the following parameters : left=%d, top=%d, width=%d, height=%d\n", disp->left, disp->top, disp->width, disp->height);
-
 }
 
-
-void displayTriangle(struct object *pt){
- 	struct triangle *disp = (struct triangle*)pt;
+void displayTriangle(struct object *pt){ // function that displays parameters of a triangle.
+	struct triangle *disp = (struct triangle*)pt;
 	printf ("this is a triangle with the following parameters : x1=%d, x2=%d, x3=%d, y1=%d, y2=%d, y3=%d \n", disp->x1, disp->x2, disp->x3, disp->y1, disp->y2, disp->y3);
 }
 
