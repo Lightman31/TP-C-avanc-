@@ -1,0 +1,9 @@
+Léo : 
+
+cd /Documents/TP-C-avance/othello/cours\ 26_11/
+
+
+java : 
+java -cp ReversIA.jar ReversIA
+dans le dossier : 
+cd /Documents/TP-C-avance/othello/A/Referee_ReversIA
