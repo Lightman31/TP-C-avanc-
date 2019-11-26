@@ -1,0 +1,11 @@
+#Player Name; GameID; Opponent Name; Player Score; Player PlayTime; Player TotalPlayTime; Player Piece; Player TotalPiece;Player LoseOnDisconnect; Player LoseOnFrame; Player LoseOnMessage; Player LoseOnTimeOut; Player LoseOn BadPlacePlayer;score winGame; score WinDefault; score BigWin Bonus; score Time Bonus; score EndGame Bonus
+PLAYER1;0;PLAYER2;6;1155;0;7;114;0;0;0;0;0;1;0;1;0;1;
+PLAYER2;0;PLAYER2;8;1231;0;57;114;0;0;0;0;0;1;0;0;0;1;
+PLAYER1;1;PLAYER2;8;1337;0;57;114;0;0;0;0;0;1;0;0;0;1;
+PLAYER2;1;PLAYER2;6;1079;0;7;114;0;0;0;0;0;1;0;0;0;1;
+PLAYER1;2;PLAYER2;6;1261;0;7;114;0;0;0;0;0;1;0;1;0;1;
+PLAYER2;2;PLAYER2;8;1436;0;57;114;0;0;0;0;0;1;0;0;0;1;
+PLAYER1;3;PLAYER2;8;1556;0;57;114;0;0;0;0;0;1;0;0;0;1;
+PLAYER2;3;PLAYER2;6;1352;0;7;114;0;0;0;0;0;1;0;0;0;1;
+PLAYER1;4;toto;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;
+toto;4;toto;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;

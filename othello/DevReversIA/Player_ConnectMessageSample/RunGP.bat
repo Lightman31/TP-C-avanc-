@@ -1,0 +1,2 @@
+GP.exe toto
+pause
