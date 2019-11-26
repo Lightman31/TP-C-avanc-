@@ -5,7 +5,7 @@
 #include<time.h>
 
 #define tabSize 100000000
-#define nb_threads 0
+#define nb_threads 8
 
 int global_threads = 0; 
 
