@@ -1,11 +1,11 @@
 #include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 #include<pthread.h>
 #include<errno.h>
 #include<time.h>
 
 #define tabSize 100000000
-#define nb_threads 0
+#define nb_threads 8
 
 int global_threads = 0; 
 
@@ -90,9 +90,9 @@ void *qsort_worker(void *arg_void)
 
 int main(void)
 {
-	clock_t startTime, endTime;
+/*	clock_t startTime, endTime;
 	float timeInSecond;
-	startTime=clock();
+	startTime=clock();*/
 
 	int * tab = malloc(sizeof(int)*tabSize);
 
@@ -116,8 +116,8 @@ int main(void)
 		printf("%d : %d\n", i, tab[i]);
 	}
 */
-
+/*
 endTime=clock();
 timeInSecond=(endTime-startTime)/(float)CLOCKS_PER_SEC;
-printf("time=%f\n",timeInSecond);
+printf("time=%f\n",timeInSecond);*/
 }

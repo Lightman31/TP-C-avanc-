@@ -3,6 +3,14 @@
 #include <malloc.h>
 #include <string.h>
 
+/**************************************************************
+
+	this function teaches us how to use pointers on functions to
+	create different objects who have the same basic elements.
+
+ **************************************************************/
+
+
 typedef struct object {
 	struct object *next;
 	void (*display)(struct object *object);

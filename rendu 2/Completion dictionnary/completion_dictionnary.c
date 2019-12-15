@@ -4,6 +4,16 @@
 
 #define SIZE_PREFIX 1024
 
+/**************************************************************
+
+	The completion dictionary function uses chained lists to 
+	store given elements in a smart way: it links words together 
+	without linking letters that they already have in common.
+	The dictionnary must start with at least one letter and won't
+	work properly with words that don't begin with said letter.
+
+ **************************************************************/
+
 typedef struct chainedList // chained list struct.
 {
 	char value;
@@ -21,7 +31,7 @@ chainedL *chain_init(char arg) // function that initialises the chain with a giv
 	return chain;
 }
 
-chainedL *word_to_chainedlist(char *str) // 
+chainedL *word_to_chainedlist(char *str) // puts the content of a string in a chained list.
 {
 	chainedL *prev = NULL;
 	chainedL *first = NULL;
@@ -51,7 +61,7 @@ chainedL *word_to_chainedlist(char *str) //
 	return first;
 }
 
-void addWord(chainedL *current, char* word_to_add) 
+void addWord(chainedL *current, char* word_to_add) //adds the current chained list containing word to the dictionary
 {
 	int string_length = strlen(word_to_add);
 	int i;
@@ -73,40 +83,9 @@ void addWord(chainedL *current, char* word_to_add)
 		addWord(current->nextword, word_to_add + i);
 	}
 }
-/*
-void display_word(chainedL *list, char *prefix)
-{
-	char original_prefix[SIZE_PREFIX];
-	strcpy(original_prefix, prefix);
-	while(list!=NULL)
-	{
-		if (list->value != '$')
-			printf("%c", list->value);
 
-		if(list->nextword == NULL)
-		{
-			strcat(prefix, &(list->value));
-		}
-		else{
-			chainedL *temp = list;
-			while(list->value !='$')
-			{
-				printf("%c", list->value);
-				list = list->nextletter;
-			}
 
-			printf("\n%s", prefix);
-			display_word(temp->nextword, prefix);
-			strcat(prefix, &(temp->value));
-		}
-
-		list = list->nextletter;
-	}
-	strcpy(prefix, original_prefix);
-}
-*/
-
-void display_word(chainedL *list)
+void display_word(chainedL *list) //displays a word from the dictionary
 {
 	while(list->value!='$')
 	{
@@ -116,7 +95,7 @@ void display_word(chainedL *list)
 	printf("\n");
 }
 
-void display_both(char *prefix, chainedL *list)
+void display_both(char *prefix, chainedL *list) //displays a word that has a common prefix with another word in the dictionary.
 {
 	char original_prefix[SIZE_PREFIX];
 	strcpy(original_prefix, prefix);
@@ -137,14 +116,8 @@ void display_both(char *prefix, chainedL *list)
 	strcpy(prefix, original_prefix);
 }
 
-void display(chainedL *current)
+void display(chainedL *current) // displays the content of the dictionary
 {
-	/*
-	char prefix[SIZE_PREFIX] = { 0 };
-	//display_word(current, prefix);
-	printf("\n");
-	*/
-
 	char prefix[SIZE_PREFIX] = { 0 };
 	display_both(prefix, current);
 }
@@ -154,17 +127,17 @@ int main(void)
 {
 	chainedL *dico_auto;
 
-	dico_auto = word_to_chainedlist("MY");
+	dico_auto = word_to_chainedlist("MY"); 
 	addWord(dico_auto, "MYTHIC");
 	addWord(dico_auto, "MYTHOLOGY");
 
-	addWord(dico_auto, "MATH");
+	addWord(dico_auto, "MATHS");
 	addWord(dico_auto, "MYTHS");
-	addWord(dico_auto, "MOZAMBIQUE");
+	addWord(dico_auto, "MOSAMBIQUE");
 	addWord(dico_auto, "MYTHOLOGIE");
 	addWord(dico_auto, "MATHEMATIQUES");
 	addWord(dico_auto, "MELANCOLIE");
 	addWord(dico_auto, "MACAQUE");
-	
+
 	display(dico_auto);
 }
