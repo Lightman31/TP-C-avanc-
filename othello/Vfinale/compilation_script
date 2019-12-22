@@ -1,0 +1,2 @@
+#!/bin/sh
+gcc main.c traitement.c -o othello
